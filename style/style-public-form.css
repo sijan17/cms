@@ -1,0 +1,113 @@
+.form {
+max-width: 400px;
+margin: 0 auto;
+
+}
+
+
+input, select{
+    width: 100%;
+    padding: 10px 8px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    
+}
+
+input:focus {
+outline: 1px solid green;
+
+}
+
+
+input[type=submit]{
+    width: 100%;
+    padding: 10px 7px;
+    margin: 8px 0;
+    cursor: pointer;
+    background-color: rgb(56, 162, 65);
+    color: #fff;
+    border: none;
+}
+
+input[type=submit]:hover {
+background-color: rgb(37, 77, 55);
+}
+
+.center a,
+.left a,
+.right a {
+margin: 10px 0;
+}
+
+.left a {
+text-decoration: none;
+color: rgb(247, 8, 8);
+float: left;
+
+}
+
+.left a:hover,
+.right a:hover,
+.center a:hover {
+opacity: 0.8;
+}
+
+.center a {
+text-decoration: none;
+color: green;
+text-align:center;
+}
+
+
+.right a {
+text-decoration: none;
+color: rgb(40, 6, 80);
+float: right;
+}
+
+.right a:hover {
+color: green;
+}
+
+.form-bottom {
+font-size: small;
+
+}
+
+.bottom {
+color: rgb(0, 0, 0);
+font-size: small;
+display: flex;
+justify-content: center;
+bottom: 40px;
+display: none;
+
+}
+.error{
+    color: red;
+}
+
+.msg{
+text-align:center;
+}
+.un-msg{
+color:red;
+}
+.su-msg{
+color:green;
+}
+.disclaimer{
+    display:none;
+}
+
+
+@media only screen and (min-width: 560px) {
+.form {
+padding-top:50px;
+}
+.form-register{
+padding-top:0px;
+}
