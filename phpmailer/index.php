@@ -20,13 +20,13 @@
 //Port to connect smtp
 	$mail->Port = "587";
 //Set gmail username
-	$mail->Username = "cms.swastik@gmail.com";
+	$mail->Username = "your@email.com";
 //Set gmail password
-	$mail->Password = "kcqaivpolaekrzse";
+	$mail->Password = "gmailpassword";
 //Email subject
 	$mail->Subject = "Email from cms-swastik";
 //Set sender email
-	$mail->setFrom('cms.swastik@gmail.com');
+	$mail->setFrom('youremail@gmail.com');
 //Enable HTML
 	$mail->isHTML(true);
 //Attachment
