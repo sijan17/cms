@@ -1,6 +1,6 @@
 <?php
     require 'auth.php';
-    $s = user_id;
+    $s = "user_id";
     if(isset($_GET['s'])){
       $s = $_GET['s']." asc--";
     }

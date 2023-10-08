@@ -25,11 +25,18 @@ $resources = $obj_admin->display('swastik_resources','resource_id');
     <link rel="stylesheet" type="text/css" href="../fontawesome/css/all.css">
     <style type="text/css">
 .container1,.post-assignment {
-  border: 2px solid #dedede;
-  background-color: #f1f1f1;
+  border: none;
   border-radius: 5px;
-  padding: 10px;
+  padding: 20px 10px;
   margin: 10px 0;
+}
+
+.time-right, .time-right a{
+    font-size: 14px;
+}
+
+.question--username{
+    margin-bottom: 10px;
 }
 </style>
 </head>
@@ -89,13 +96,13 @@ $count = $obj_admin->count("swastik_replies","r_to",$questions[$i]['q_id'])
     ?> 
 <div class="container1">
   <img src="../user-img/<?php echo $user_info['user_image'] ?>" alt="Avatar" style="width:100%;">
-  <p><b><?php 
+  <div class="question--username"><b><?php 
 
   if($questions[$i]['q_by']==$_SESSION['user_id']){
         echo "You";
     }else{
         echo $user_info['user_fullname'];
-  } ?></b> : <?php echo $questions[$i]['q_content'] ?></p>
+  } ?></b> </div> <p>  <?php echo $questions[$i]['q_content'] ?></p>
   <span class="time-right" ><a style="color:#719523" href="replies.php?q=<?php echo $questions[$i]['q_id'];?>"><?php echo $count ?> Replies</i>
 </a> |
 

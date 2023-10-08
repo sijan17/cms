@@ -6,6 +6,8 @@ if(isset($_GET['search'])){
     $searchTerm = $_GET['searchTerm'];
     $results = $obj_admin->searchData($searchTerm);
 }
+
+$resources = $obj_admin->display('swastik_resources','resource_id');
 ?>
 
 
@@ -66,7 +68,11 @@ if(isset($_GET['search'])){
 
             <div class="contents">
 <form method="get" class="search">
-        <input type="text" name="searchTerm" placeholder="Enter search term" required>
+        <input type="text" name="searchTerm" placeholder="Enter search term"
+        <?php if(!empty($searchTerm)){
+            echo "value='".$searchTerm."'";
+        } ?>
+        required>
         <button type="submit" name="search" class="search-button" >
         <i class="fa-solid fa-search"></i>
         </button>

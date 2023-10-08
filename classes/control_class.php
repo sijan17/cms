@@ -598,6 +598,7 @@ class control_class
 				$post_resource->execute();
 				$message = "<p style='color:green;'>Posted.</p>";
 			} catch (PDOException $exception) {
+				echo $exception;
 				echo "Sorry, Internal Server Error.";
 			}
 		} else {

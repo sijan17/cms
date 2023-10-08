@@ -155,6 +155,7 @@ $note = $obj_admin->display('swastik_notes','note_id');
                   ?>
                   </td>
               </tr>
+              <?php if($_SESSION['user_permission']== 0){ ?>
               <tr><td> Reg. No.       :</td> <td> <?php echo $_SESSION['user_regno'] ?> 
               <tr> 
                 <td>   Faculty  : </td><td>  <?php if($_SESSION['user_faculty']!=NULL){
@@ -167,6 +168,8 @@ $note = $obj_admin->display('swastik_notes','note_id');
                            }
                            } ?> </td> </tr>
                <tr> <td> Semester :</td> <td><?php echo $_SESSION['user_semester'] ?> </td> </tr>
+
+               <?php } ?>
                 <tr><td> Email       :</td> <td> <?php echo $_SESSION['user_email'] ?> 
                 <!-- <a style="color:blue" id="change">Change</a> -->
             </td>

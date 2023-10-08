@@ -21,6 +21,14 @@ input[type="text"]{
     width: 100%;
 }
 
+input[type="submit"], button{
+    transition: all ease 300ms;
+}
+
+input[type="submit"]:hover, button:hover{
+    opacity: 0.8;
+}
+
 .container {
     display: flex;
 }
@@ -317,7 +325,6 @@ input[type=submit]{
     .post-assignment input,.post-assignment textarea{
         display: block;
         width: 100%;
-        padding: 3px;
         margin:  7px 0;
         
     }
@@ -327,13 +334,14 @@ input[type=submit]{
     }
 
     .post-assignment input[type=submit]{
-        width: 80px;
-        height: 28px;
         background-color: #04aa6d;
         border: none;
         color: white;
         border-radius: 3px;
+        max-width: 90px;
     }
+
+    
 
 
 
@@ -810,6 +818,10 @@ input[type=submit]{
         height: 30px;
     }
 
+    textarea{
+        padding: 5px 10px ;
+    }
+
     .feedback-section input[type=submit]{
         width: 100px;
         height: 30px;
@@ -826,7 +838,7 @@ input[type=submit]{
 .notice textarea{
     width: 100%;
     box-sizing: border-box;
-    height: 80px;
+    height: 100px;
 }
 
 
@@ -839,7 +851,6 @@ input[type=submit]{
     border-radius: 9px;  
     cursor: pointer;
     box-sizing: border-box;
-    
 }
 .notes-section input:hover, .assignment-section input:hover{
     background-color: #04aa6d;
@@ -863,18 +874,21 @@ input[type=submit]{
     .post-assignment input,.post-assignment textarea{
         display: block;
         width: 100%;
-        padding: 3px;
         margin:  7px 0;
-        
     }
+
+    .post-assignment input[type=submit]{
+        padding: 5px;
+    }
+
+    
     .post-assignment label{
         margin:  15px 0;
        
     }
 
     .post-assignment input[type=submit]{
-        width: 80px;
-        height: 28px;
+    
         background-color: #04aa6d;
         border: none;
         color: white;
@@ -884,7 +898,7 @@ input[type=submit]{
 
 
 .container1 {
-  border: 2px solid #dedede;
+  border: none;
   background-color: #f1f1f1;
   border-radius: 5px;
   
@@ -906,8 +920,8 @@ input[type=submit]{
 .container1 img {
 object-fit: cover;
   float: left;
-  max-width: 40px;
-  height: 40px;
+  max-width: 60px;
+  height: 60px;
   /*width: 100%;*/
   /*margin-right: 20px;*/
   margin-right: 12px;
