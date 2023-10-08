@@ -1,7 +1,7 @@
 <?php
 
 $search_value = $_POST["search"];
-$conn = mysqli_connect("localhost","swastik","password","cms_swastik") or die("Connection Failed");
+$conn = mysqli_connect("localhost","root","password","cms_swastik") or die("Connection Failed");
 
 $sql = "SELECT * FROM swastik_users WHERE user_fullname LIKE '%{$search_value}%' ";
 $result = mysqli_query($conn, $sql) or die("SQL Query Failed.");

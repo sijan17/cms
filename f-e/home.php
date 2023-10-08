@@ -49,6 +49,7 @@ $resources = $obj_admin->display('swastik_resources','resource_id');
                                     class="title">Assignment</span></a></li>
                         <li><a href="notes.php"><i class="fa-solid fa-book-open"></i><span class="title">Notes</span></a></li>
                         <li><a href="notices.php"><i class="fa-solid fa-bullhorn"></i><span class="title">Notices</span></a></li>
+                        <li><a href="search.php"><i class="fa-solid fa-search"></i><span class="title">Search</span></a></li>
                         <li><a href="feedback.php"><i class="fa-solid fa-comment"></i><span class="title">Feedback</span></a></li>
                         <li><a href="profile.php"><i class="fa-solid fa-user"></i><span class="title">Profile</span></a></li>
                         <li><a href="logout.php" onClick="return confirm('Are you sure you want to log out?')"><i class="fa-solid fa-arrow-right-from-bracket"></i><span class="title">Log Out</span>

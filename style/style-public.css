@@ -1,7 +1,9 @@
+  @import url('https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
-    font-family: Effra,sans-serif;
+    font-family: 'Onest', sans-serif;
 }
 
 .bg-img {
@@ -97,7 +99,6 @@ a {
     }
     .logo-section img{
         height: 40px;
-        al
     }
 
     .menu-section a {
