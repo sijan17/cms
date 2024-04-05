@@ -8,6 +8,9 @@ if(isset($_POST['Post'])){
 
 $questions=$obj_admin->display('swastik_questions' ,'q_id');
 $resources = $obj_admin->display('swastik_resources','resource_id');
+$recommendedContent = $obj_admin->recommendContent($_SESSION['user_id']);
+
+
 
 
 ?>
@@ -37,6 +40,14 @@ $resources = $obj_admin->display('swastik_resources','resource_id');
 
 .question--username{
     margin-bottom: 10px;
+    display:flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+}
+
+.question--username__username{
+    font-size: 18px;
 }
 </style>
 </head>
@@ -91,18 +102,25 @@ $resources = $obj_admin->display('swastik_resources','resource_id');
 <?php 
 for($i=0; $i<=10;$i++) { 
 if($questions[$i]['q_id']!=NULL) { 
-$user_info = $obj_admin->edit("user_image,user_fullname","swastik_users","user_id",$questions[$i]['q_by']);
+$user_info = $obj_admin->edit("user_image,user_fullname, user_permission","swastik_users","user_id",$questions[$i]['q_by']);
 $count = $obj_admin->count("swastik_replies","r_to",$questions[$i]['q_id'])
     ?> 
 <div class="container1">
   <img src="../user-img/<?php echo $user_info['user_image'] ?>" alt="Avatar" style="width:100%;">
-  <div class="question--username"><b><?php 
+  <div class="question--username">
+    <span class="question--username__name"><?php 
 
   if($questions[$i]['q_by']==$_SESSION['user_id']){
         echo "You";
     }else{
         echo $user_info['user_fullname'];
-  } ?></b> </div> <p>  <?php echo $questions[$i]['q_content'] ?></p>
+  } ?>
+</span>
+<?php if($user_info['user_permission'] == 1) {
+    echo "<span style='font-size: 12px; font-weight: bold; color: green'>(T)</span>";
+} ?>  
+
+</div> <p>  <?php echo $questions[$i]['q_content'] ?></p>
   <span class="time-right" ><a style="color:#719523" href="replies.php?q=<?php echo $questions[$i]['q_id'];?>"><?php echo $count ?> Replies</i>
 </a> |
 
@@ -136,8 +154,8 @@ $count = $obj_admin->count("swastik_replies","r_to",$questions[$i]['q_id'])
             <div class="title"><h3>Recommended External resources:</h3></div>
             <div class="resource-content">
                 <ul>
-                    <?php foreach($resources as $r){ ?>
-                    <li><a href="<?php echo $r['resource_link'] ?>">🔰<?php echo $r['resource_title'] ?></a></li>
+                    <?php  foreach ($recommendedContent as $content) { ?>
+                    <li><a href="<?php echo $content['link'] ?>" data-score="<?php echo $content['score'] ?>">🔰<?php echo $content['title'] ?></a></li>
                     <?php } ?>                
                 </ul>
             </div>

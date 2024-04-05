@@ -169,7 +169,7 @@ class control_class
 			$emailErr = "Invalid email format.";
 		} else {
 			try {
-				$sqlEmail = "SELECT user_email FROM swastik_users WHERE user_email = '$user_email' ";
+				$sqlEmail = "SELECT user_email FROM swastik_users WHERE user_email = '$e' ";
 				$query_result_for_email = $this->db->prepare($sqlEmail);
 				$query_result_for_email->execute();
 				$total_email = $query_result_for_email->rowCount();
@@ -1103,6 +1103,85 @@ public function searchData($searchTerm){
         echo "Error: " . $e->getMessage();
         return [];
     }
+}
+
+
+
+private function cosineSimilarity($words1, $words2) {
+	$tf1 = array_count_values($words1);
+	$tf2 = array_count_values($words2);
+
+	$dotProduct = 0;
+	foreach ($tf1 as $word => $tf1Value) {
+		if (isset($tf2[$word])) {
+			$dotProduct += $tf1Value * $tf2[$word];
+		}
+	}
+
+	$norm1 = sqrt(array_sum(array_map(function($tf) { return $tf * $tf; }, $tf1)));
+	$norm2 = sqrt(array_sum(array_map(function($tf) { return $tf * $tf; }, $tf2)));
+
+	if ($norm1 != 0 && $norm2 != 0) {
+		return $dotProduct / ($norm1 * $norm2);
+	} else {
+		return 0; 
+	}
+}
+
+function preprocessText($text) {
+    $text = strtolower($text); 
+    $text = preg_replace("/[^a-zA-Z0-9\s]/", "", $text); 
+    $words = explode(' ', $text); 
+
+    return $words;
+}
+
+
+public function recommendContent($userId) {
+    $sql = "SELECT q.q_content AS content FROM swastik_questions q WHERE q.q_by = ?
+            UNION
+            SELECT r.r_content AS content FROM swastik_replies r WHERE r.r_by = ?";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute([$userId, $userId]);
+    $userContent = [];
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $userContent[] = $row['content'];
+    }
+
+    $sql = "SELECT resource_title, resource_link FROM swastik_resources";
+    $stmt = $this->db->prepare($sql);
+    $stmt->execute();
+    $recommendationContent = [];
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $recommendationContent[] = [
+            'title' => $row['resource_title'],
+            'link'  => $row['resource_link'],
+        ];
+    }
+
+    $userWords = [];
+    foreach ($userContent as $content) {
+        $userWords = array_merge($userWords, $this->preprocessText($content));
+    }
+
+	$similarities = [];
+    foreach ($recommendationContent as $recContent) {
+        $recWords = $this->preprocessText($recContent['title']);
+        $similarityScore = $this->cosineSimilarity($userWords, $recWords);
+        $similarities[] = [
+            'title' => $recContent['title'],
+            'link'  => $recContent['link'],
+            'score' => $similarityScore,
+        ];
+    }
+
+    // Sort the array based on score in descending order
+    usort($similarities, function($a, $b) {
+        return $b['score'] <=> $a['score'];
+    });
+
+    // Return an array with title, link, and score
+    return array_slice($similarities, 0, 3);
 }
 
 
